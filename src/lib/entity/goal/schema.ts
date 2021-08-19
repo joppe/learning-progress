@@ -29,7 +29,7 @@ export const schema = new Schema<Goal>({
   progress: {
     started: Date,
     last_update: Date,
-    part: Number,
+    current: Number,
   },
   goal: {
     parts: {
