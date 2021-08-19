@@ -4,6 +4,7 @@
   import { predicted} from '$lib/progress/predicted';
   import ResourceType from '$component/resource-type.svelte';
   import Progress from '$component/progress.svelte';
+  import Meta from '$component/meta.svelte';
 
   export let goal: Goal;
 
@@ -20,13 +21,6 @@
 
 <section>
   <h2><ResourceType type={goal.resource.type} />{goal.resource.name}</h2>
-  <dl>
-    <dt>Topic</dt>
-    <dd>{goal.topic}</dd>
-    <dt>Parts</dt>
-    <dd>{goal.parts.type}</dd>
-    <dt>Count</dt>
-    <dd>{goal.parts.count}</dd>
-  </dl>
+  <Meta goal={goal} />
   <Progress value={goal.progress.current ?? 0} max={goal.parts.count} label="{label}" />
 </section>
