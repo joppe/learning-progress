@@ -18,6 +18,14 @@
   export let goals: Goal[];
 </script>
 
+<style>
+  ul {
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
+
 <h1>Learning progress</h1>
 
 <ul>
