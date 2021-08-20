@@ -1,5 +1,7 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import type { Goal } from './goal';
+
+const { Schema } = mongoose;
 
 export const schema = new Schema<Goal>({
   resource: {
