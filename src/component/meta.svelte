@@ -1,8 +1,55 @@
-<script type="ts">
+<script lang="ts">
   import type { Goal } from '$lib/entity/goal/goal';
+  import { plural } from '$lib/text/plural';
 
-  export let goal: Goal
+  export let goal: Goal;
+
+  let disabled = false;
+
+  async function updateProgress() {
+    disabled = true;
+
+    const url = `/goal/update/${goal._id}`;
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify(goal),
+    });
+
+    if (response.ok) {
+      disabled = false;
+    }
+  }
 </script>
+
+<dl>
+  <dt>Topic</dt>
+  <dd>
+    {goal.topic} | {goal.parts.count}
+    {plural(goal.parts.type, goal.parts.count)}
+  </dd>
+  <dt>Goal</dt>
+  <dd>
+    {goal.goal.parts}
+    {plural(goal.parts.type, goal.goal.parts)}/{goal.goal.days}
+    {plural('day', goal.goal.days)}
+  </dd>
+  {#if goal.progress.started !== undefined}
+    <dt>Started</dt>
+    <dd>{goal.progress.started}</dd>
+  {/if}
+  <dt>Current</dt>
+  <dd>
+    <input
+      type="number"
+      bind:value={goal.progress.current}
+      on:change={updateProgress}
+      {disabled}
+    />
+  </dd>
+</dl>
 
 <style>
   dl {
@@ -14,14 +61,3 @@
     font-weight: bold;
   }
 </style>
-
-<dl>
-  <dt>Topic</dt>
-  <dd>{goal.topic}</dd>
-  <dt>Parts</dt>
-  <dd>{goal.parts.type}</dd>
-  <dt>Count</dt>
-  <dd>{goal.parts.count}</dd>
-  <dt>Current</dt>
-  <dd>{goal.progress.current}</dd>
-</dl>

@@ -5,5 +5,5 @@ export function percentage(goal: Goal): number {
     return 0;
   }
 
-  return 100 * (goal.progress.current / goal.parts.count);
+  return 100 * ((goal.progress.current - 1) / goal.parts.count);
 }

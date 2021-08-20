@@ -5,7 +5,7 @@ import type { Request } from '@sveltejs/kit';
 
 export async function put(
   request: Request<Record<string, string>, Goal>,
-): Promise<{}> {
+): Promise<Record<string, string | number>> {
   let error = 'error';
 
   await connect();

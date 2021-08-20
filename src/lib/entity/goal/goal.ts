@@ -1,4 +1,5 @@
 export type Goal = {
+  _id: string;
   resource: {
     name: string;
     type: string;

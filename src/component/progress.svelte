@@ -1,10 +1,15 @@
-<script type="ts">
+<script lang="ts">
   export let value: number;
   export let max: number;
   export let label: string;
 
   const percentage = value === 0 ? 0 : (value / max) * 100;
 </script>
+
+<div class="container">
+  <div class="bar" style="width: {percentage}%" />
+  <div class="label">{label}</div>
+</div>
 
 <style>
   .container {
@@ -27,9 +32,3 @@
     text-align: center;
   }
 </style>
-
-<div class="container">
-  <div class="bar" style="width: {percentage}%"></div>
-  <div class="label">{label}</div>
-</div>
-
