@@ -12,6 +12,12 @@ export async function put(
 
   const goal = request.body;
 
+  if (goal.progress.started === undefined) {
+    goal.progress.started = new Date();
+  }
+
+  goal.progress.last_update = new Date();
+
   try {
     const result = await Model.updateOne(
       {
