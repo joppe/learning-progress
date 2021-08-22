@@ -55,6 +55,8 @@
   dl {
     display: grid;
     grid-template-columns: 100px 1fr;
+    grid-gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
   }
 
   dt {

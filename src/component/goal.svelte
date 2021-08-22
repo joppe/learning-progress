@@ -14,14 +14,28 @@
 </script>
 
 <section>
-  <h2><ResourceType type={goal.resource.type} />{goal.resource.name}</h2>
+  <h2>
+    <ResourceType type={goal.resource.type} /><span>{goal.resource.name}</span>
+  </h2>
   <Meta {goal} />
   <Progress value={current} max={goal.parts.count} {label} />
 </section>
 
 <style>
+  section {
+    padding: var(--spacing-md);
+    border: 1px solid var(--grey--charcoal);
+    border-radius: 3px;
+  }
+
   h2 {
     display: flex;
     align-items: center;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+  }
+
+  h2 span {
+    margin-left: var(--spacing-md);
   }
 </style>

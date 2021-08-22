@@ -10,3 +10,9 @@
 <main>
   <slot />
 </main>
+
+<style>
+  main {
+    padding: var(--spacing-md);
+  }
+</style>

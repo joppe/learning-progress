@@ -20,7 +20,7 @@
 
   .bar {
     height: 100%;
-    background-color: orange;
+    background-color: var(--green--japanese-laurel);
   }
 
   .label {

@@ -31,9 +31,19 @@
 </ul>
 
 <style>
+  h1 {
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    font-size: var(--font-size-xl);
+  }
+
   ul {
-    margin: 0 0 20px 0;
+    margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  li {
+    margin-bottom: var(--spacing-lg);
   }
 </style>
