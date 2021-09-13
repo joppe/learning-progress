@@ -8,9 +8,15 @@
 
   export let goal: Goal;
 
-  const current = goal.progress?.current ? goal.progress.current - 1 : 0;
-  const diff = current - predicted(goal).toFixed(1);
-  const label = `${percentage(goal).toFixed(1)}% | ${diff}`;
+  let current;
+  let diff;
+  let label;
+
+  $: {
+    current = goal.progress?.current ? goal.progress.current - 1 : 0;
+    diff = current - predicted(goal).toFixed(1);
+    label = `${percentage(goal).toFixed(1)}% | ${diff}`;
+  }
 </script>
 
 <section>
