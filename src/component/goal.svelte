@@ -23,7 +23,7 @@
   <h2>
     <ResourceType type={goal.resource.type} /><span>{goal.resource.name}</span>
   </h2>
-  <Meta {goal} />
+  <Meta bind:goal />
   <Progress value={current} max={goal.parts.count} {label} />
 </section>
 
