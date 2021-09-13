@@ -1,10 +1,37 @@
 <script lang="ts">
   import type { Goal } from '$lib/entity/goal/goal';
   import { plural } from '$lib/text/plural';
+  import { startOfDay } from '$lib/date/start-of-day';
+  import { addDays } from '$lib/date/add-days';
 
   export let goal: Goal;
 
   let disabled = false;
+  let originalEndDate;
+  let estimatedEndDate;
+
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  };
+  const dateTimeFormat = new Intl.DateTimeFormat('en-US', options);
+
+  if (goal.progress.started) {
+    const today = startOfDay(new Date());
+    const started = startOfDay(new Date(goal.progress.started));
+    const perDay = goal.goal.parts / goal.goal.days;
+
+    originalEndDate = addDays(started, goal.parts.count / perDay);
+    estimatedEndDate = addDays(
+      today,
+      (goal.parts.count - goal.progress.current) / perDay,
+    );
+  }
+
+  function formatDate(date) {
+    return dateTimeFormat.format(date);
+  }
 
   async function updateProgress() {
     disabled = true;
@@ -38,7 +65,11 @@
   </dd>
   {#if goal.progress.started !== undefined}
     <dt>Started</dt>
-    <dd>{goal.progress.started}</dd>
+    <dd>{formatDate(new Date(goal.progress.started))}</dd>
+    <dt>Finish</dt>
+    <dd>
+      {formatDate(originalEndDate)} (planned) | {formatDate(estimatedEndDate)} (estimated)
+    </dd>
   {/if}
   <dt>Current</dt>
   <dd>
