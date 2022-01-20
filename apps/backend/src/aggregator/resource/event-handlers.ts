@@ -15,19 +15,24 @@ export function eventHandlers({
       const ev = event as AddedEvent;
       const id = getId(ev.stream_name);
       const ResourceModel = model(connection);
-      const resource = new ResourceModel({
-        _id: id,
-        title: ev.data.title,
-        type: ev.data.type,
-        topic: ev.data.topic,
-        parts: {
-          count: ev.data.parts.count,
-          type: ev.data.parts.type,
-        },
-        position: ev.position,
-      });
 
-      resource.save();
+      await ResourceModel.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            _id: id,
+            title: ev.data.title,
+            type: ev.data.type,
+            topic: ev.data.topic,
+            parts: {
+              count: ev.data.parts.count,
+              type: ev.data.parts.type,
+            },
+            position: ev.position,
+          },
+        },
+        { upsert: true },
+      );
     },
   };
 }
